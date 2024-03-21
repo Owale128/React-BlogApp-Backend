@@ -1,1 +1,11 @@
 GET http://localhost:3000/api/blogPosts
+
+
+###
+POST http://localhost:3000/api/blogPost
+Content-Type: application/json
+
+{
+    "title": "Nytt blogginlägg",
+    "content": "Detta är innehållet i mitt nya blogginlägg"
+}

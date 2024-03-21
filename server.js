@@ -23,6 +23,23 @@ app.get('/api/blogPosts', async (req, res) => {
     }
   });
   
+app.post('/api/blogPost', async (req,res)=>{
+
+try {
+  await client.connect();
+  const collection = client.db('Blog').collection('BlogPosts');
+  const newBlogPost = req.body;
+  const result = await collection.insertOne(newBlogPost);
+  res.status(201).json({ message: "Blog post successfully added!", insertedId: result.insertedId });
+}catch (error) {
+  console.error("Error creating blog post:", error);
+res.status(500).json({ error: "Internal Server Error"});
+} finally {
+  await client.close();
+}
+
+});
+
 
 
   app.listen(port, () => {
