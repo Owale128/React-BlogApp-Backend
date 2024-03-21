@@ -1,5 +1,5 @@
 const express = require("express");
-const { MongoClient} = require("mongodb");
+const { MongoClient, ObjectId} = require("mongodb");
 const app = express();
 const port = 3000;
 require('dotenv').config();
@@ -40,7 +40,25 @@ res.status(500).json({ error: "Internal Server Error"});
 
 });
 
-
+app.delete('/api/blogPost/:id', async(req, res) =>{
+  
+  try {
+    await client.connect();
+    const collection = client.db('Blog').collection('BlogPosts');
+    const postId = req.params.id;
+    const result = await collection.deleteOne({_id: new ObjectId(postId) });
+    if (result.deletedCount ===0) {
+      res.status(404).json({ error: "Blog post not found"});
+    } else {
+      res.status(204).json({ message: "Blog post successfully deleted!" });
+    }
+  } catch (error) {
+    console.error("Error deleting blog post", error);
+    res.status(500).json({ error: "internal Server Error"});
+  } finally {
+    await client.close()
+  }
+})
 
   app.listen(port, () => {
     console.log(`Server is running on port ${port}`);

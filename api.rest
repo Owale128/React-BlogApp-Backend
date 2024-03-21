@@ -7,5 +7,9 @@ Content-Type: application/json
 
 {
     "title": "Nytt blogginlägg",
-    "content": "Detta är innehållet i mitt nya blogginlägg"
+    "content": "Välkommen till min Blogg!"
 }
+
+
+###
+DELETE http://localhost:3000/api/blogPost/65fc143e7d94f7172112920a
