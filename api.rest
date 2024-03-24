@@ -10,6 +10,15 @@ Content-Type: application/json
     "content": "Fitness"
 }
 
+###
+PUT http://localhost:3000/api/blogPost/660041f20496ccf261944ffe
+Content-Type: application/json
+
+{
+    "title": "Zamiel",
+    "content": "Buaka"
+}
+
 
 ###
 DELETE http://localhost:3000/api/blogPost/
