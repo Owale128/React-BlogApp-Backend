@@ -1,13 +1,15 @@
 const express = require("express");
+const cors = require("cors")
 const { MongoClient, ObjectId} = require("mongodb");
 const app = express();
 const port = 3000;
-require('dotenv').config();
+require("dotenv").config();
 
 const uri = process.env.MONGODB_URI;
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
 
 app.use(express.json());
+app.use(cors());
 
 app.get('/api/blogPosts', async (req, res) => {
     try {
@@ -30,7 +32,8 @@ try {
   const collection = client.db('Blog').collection('BlogPosts');
   const newBlogPost = req.body;
   const result = await collection.insertOne(newBlogPost);
-  res.status(201).json({ message: "Blog post successfully added!", insertedId: result.insertedId });
+  const insertedPost = await collection.findOne({ _id: result.insertedId });
+  res.status(201).json({ message: "Blog post successfully added!", post: insertedPost });
 }catch (error) {
   console.error("Error creating blog post:", error);
 res.status(500).json({ error: "Internal Server Error"});

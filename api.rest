@@ -6,10 +6,10 @@ POST http://localhost:3000/api/blogPost
 Content-Type: application/json
 
 {
-    "title": "Nytt blogginlägg",
-    "content": "Välkommen till min Blogg!"
+    "title": "Nytt blogginlägg:",
+    "content": "Fitness"
 }
 
 
 ###
-DELETE http://localhost:3000/api/blogPost/65fc143e7d94f7172112920a
+DELETE http://localhost:3000/api/blogPost/
