@@ -8,9 +8,12 @@ require("dotenv").config();
 const uri = process.env.MONGODB_URI;
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
 
-app.use(express.json());
-app.use(cors());
+app.use(cors({
+  origin: 'https://christiansblogsite.netlify.app',
+  optionsSuccessStatus: 200 
+}));
 
+app.use(express.json());
 
 app.get('/api/blogPosts', async (req, res) => {
     try {
